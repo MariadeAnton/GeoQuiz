@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        applicationId "android.bignerdranch.com.geoquiz"
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            applicationIdSuffix".release"
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        dev{
+            applicationIdSuffix".dev"
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors{
+        flavors_release{
+            manifestPlaceholders = [str: "releaseStr", package_name: "android.bignerdranch.com.geoquiz.release"]
+
+            resValue("string", "strKey", "releaseStrValue")
+        }
+
+        flavors_dev{
+            manifestPlaceholders = [str: "devStr", package_name: "android.bignerdranch.com.geoquiz.dev"]
+
+            resValue("string", "strKey", "devStrValue")
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}
